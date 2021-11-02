@@ -331,13 +331,13 @@ if __name__ == '__main__':
         os.mkdir('output')
 
     # Negative Transform
-    img = Image.open('xray.jpg')
+    img = Image.open('input/xray.jpg')
     img = np.array(img)
     negative = PixelOp.GrayLevelTransform.negative(img)
     Image.fromarray(negative).convert('L').save('output/negative.jpg')
 
     # Log Transform
-    img = np.array(Image.open('night.jpg'), dtype='int')
+    img = np.array(Image.open('input/night.jpg'), dtype='int')
     log = img.copy()
     for channel in range(3):
         log[:, :, channel] = PixelOp.GrayLevelTransform.log(img[:, :, channel])
@@ -350,7 +350,7 @@ if __name__ == '__main__':
         Image.fromarray(power_law).save(f'output/PowerLaw_{gamma}.jpg')
 
     # Contrast stretching
-    img = Image.open('low_contrast.jpg').convert('L')
+    img = Image.open('input/low_contrast.jpg').convert('L')
     img = np.array(img)
 
     # min-Max
@@ -377,7 +377,7 @@ if __name__ == '__main__':
     plt.savefig('output/contrast_hist.png')
 
     # Neighborhood Op
-    img = Image.open('pepper.jpeg').convert('L')
+    img = Image.open('input/pepper.jpeg').convert('L')
     img = np.array(img)
 
     # Sharpening
@@ -410,7 +410,7 @@ if __name__ == '__main__':
     Image.fromarray(edge_corner).convert('L').save('output/edge_corner.jpg')
 
     # Minus Smooth
-    img = Image.open('night.jpg')
+    img = Image.open('input/night.jpg')
     img = np.array(img)
 
     edge_night = NeighborhoodOp.filtering(img, mode='laplacian')
